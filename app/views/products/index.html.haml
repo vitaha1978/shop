@@ -1,0 +1,25 @@
+%h1.brand каталог продукції
+
+%table.table.table-hover
+  %thead
+    %tr
+      %th Найменування
+      %th Ціна
+      %th Зображення      
+      %th
+      
+  %tbody
+    - @products.each do |product|
+      %tr
+        %td= link_to product.name, product
+        %td
+          = sprintf("%0.02f", product.price)
+          грн.
+        %td= image_tag product.image.thumb
+        %td          
+          = link_to 'Редагувати', edit_product_path(product)
+          \|
+          = link_to 'Видалити', product, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%p
+  = link_to 'Створити новий продукт', new_product_path, class: "btn btn-xs btn-primary"

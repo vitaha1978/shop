@@ -1,0 +1,12 @@
+%h1.brand= @product.name
+
+%p
+	= image_tag @product.image.b_thumb
+%p
+	= sprintf("%0.02f", @product.price)
+	грн.
+
+%p
+	= link_to 'Редагувати', edit_product_path(@product)
+	\|
+	= link_to 'До каталогу', products_path
