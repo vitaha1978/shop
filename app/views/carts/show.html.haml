@@ -1,0 +1,26 @@
+%table.table.table-hover
+	%thead
+		%tr			
+			%th Найменування
+			%th Кількість
+			%th Ціна
+			%th Всього
+		-@cart.items.each do |item|
+			%tr				
+				%td
+					=image_tag item.product.image.thumb
+					=link_to item.product.name, item.product
+				%td=item.quantity
+				%td
+					=sprintf("%0.02f", item.product.price)
+					грн.
+				%td
+					=sprintf("%0.02f", item.total_price)
+					грн.	
+			
+%p.text-right.brand.strong
+	Всього:
+	=sprintf("%0.02f", @cart.total_price)
+	грн.
+
+%p=link_to "Оформити замовлення", checkout_cart_path, class: "btn btn-primary"

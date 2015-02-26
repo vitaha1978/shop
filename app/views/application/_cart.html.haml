@@ -1,0 +1,6 @@
+-if @cart
+	%p.navbar-text.navbar-right
+		-if @cart.empty?
+			Ваша корзина порожня.
+		-else
+			=link_to "У Вашій корзині товару #{@cart.count} шт.", cart_path

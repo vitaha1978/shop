@@ -2,8 +2,12 @@ class Cart
 	attr_reader :items
 
 	def self.build_from_hash hash
-		items = hash["cart"]["items"].map do |item_data|
-			CartItem.new item_data["product_id"], item_data["quantity"]
+		items = if hash["cart"] then
+			hash["cart"]["items"].map do |item_data|
+				CartItem.new item_data["product_id"], item_data["quantity"]
+			end
+		else
+			[]
 		end
 
 		new items
@@ -27,6 +31,10 @@ class Cart
 		@items.empty?
 	end
 
+	def count
+		@items.length
+	end
+
 	def serialize
 		items = @items.map do |item|
 			{
@@ -35,10 +43,12 @@ class Cart
 			}
 		end
 
-		{
-			"cart" => {
-				"items" => items
-			}
+		{			
+			"items" => items			
 		}
+	end
+
+	def total_price
+		@items.inject(0) { |sum, item| sum + item.total_price }
 	end
 end

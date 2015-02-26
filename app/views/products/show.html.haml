@@ -6,6 +6,8 @@
 	= sprintf("%0.02f", @product.price)
 	грн.
 
+%p=link_to "Додати до корзини", add_cart_path, method: :post, class: "btn btn-primary"
+
 %p
 	= link_to 'Редагувати', edit_product_path(@product)
 	\|

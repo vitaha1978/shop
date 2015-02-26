@@ -1,0 +1,33 @@
+%h1.brand Оформлення замовлення:
+	
+%h4 Ви замовили наступні позиції:
+
+%ul
+	-@cart.items.each do |item|
+		%li
+			%em
+			=item.quantity 
+			шт. 
+			=item.product.name
+			=sprintf("%0.02f", item.total_price)
+			грн.
+%p
+
+	%strong.brand
+		Всього на суму:
+		=sprintf("%0.02f", @cart.total_price)
+		грн.
+
+=form_for @order_form, url: orders_path do |f|
+	%h3 Введіть свої данні:
+	=f.fields_for :user, f.object.user do |u|
+		.form-group
+			%p=u.text_field :name, placeholder: "Ім'я", class: "form-control"
+			%span.help-block Інформація про Вашу електронну адресу та номер телефону, допоможе Вам відслідковувати Ваше замовлення більш ефективно. 
+		.form-group
+			.row
+				%p.col-md-6=u.text_field :phone, placeholder: "Номер телефону", class: "form-control"		
+				%p.col-md-6=u.text_field :email, placeholder: "Email", class: "form-control"
+			%span.help-block Ми гарантуємо конфеденційність Ваших данних.
+
+
