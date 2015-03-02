@@ -1,0 +1,9 @@
+-if @order_form.has_errors?
+	.panel.panel-danger
+		.panel-heading
+			%h4.panel-title Вам слід внести деякі поправки в форму.				
+		.panel-body
+			-@order_form.user.errors.full_messages.each do |error|
+				%p
+					%strong Користувач:
+					=error
